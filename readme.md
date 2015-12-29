@@ -13,11 +13,13 @@ $ npm install --save fixed-path
 ## Usage
 
 ```js
-const fixPath = require('fixed-path');
+const fixedPath = require('fixed-path');
 
-fixPath('./index.js', (err, fixedPath) => {
+fixePath('./index.js', (err, fixedPath) => {
 	console.log(fixPath); // /Users/Hemanth/labs/fixed-path/index.js
 });
+
+fixedPath.sync('./index.js') // /Users/Hemanth/labs/fixed-path/index.js
 ```
 
 ## License

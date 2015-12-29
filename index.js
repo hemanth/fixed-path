@@ -2,7 +2,7 @@
 var fs = require('fs');
 var path = require('path');
 
-module.exports = function (filepath, cb) {
+var fixedPath = module.exports = function (filepath, cb) {
 	var fixedPath = path.resolve(path.normalize(filepath.trim()));
 	fs.realpath(fixedPath, function (err) {
 		if (err) {
@@ -11,3 +11,15 @@ module.exports = function (filepath, cb) {
 		cb(null, fixedPath);
 	});
 };
+
+fixedPath.sync = function (filepath) {
+	var fixedPath = path.resolve(path.normalize(filepath.trim()));
+	try {
+		fixedPath = fs.realpathSync(fixedPath);
+	} catch (err) {
+    if (err.code !== 'ENOENT') {
+      throw err;
+    }
+  }
+  return fixedPath;
+}
